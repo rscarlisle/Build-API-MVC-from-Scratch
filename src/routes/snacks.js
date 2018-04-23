@@ -3,6 +3,7 @@ const router = express.Router();
 const controller = require('../controllers/snacks');
 
 router.get('/', controller.getAll);
-router.get('/:id', controller.getById)
+router.get('/:id', controller.getById);
+router.post('/', controller.create);
 
 module.exports = router;
