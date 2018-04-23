@@ -10,5 +10,9 @@ module.exports = [
     {
       name: 'SnackThree',
       id: "3"
-    }    
+    },
+    {
+      name: 'SnackFour',
+      id: "4"
+    }   
   ]
