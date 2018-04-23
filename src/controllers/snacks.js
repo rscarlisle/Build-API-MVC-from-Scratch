@@ -28,8 +28,24 @@ getById = (req, res, next) => {
     res.status(200).json({ snack })
   }
 
+  create = (req, res, next) => {
+    console.log("REQ BODY", req.body)
+    const snack = model.create(req.body)
+  
+    if (snack.errors) {
+      return next({
+        status: 400,
+        message: `The 'name' or 'id' field is missing`,
+        errors: snack.errors
+      })
+    }
+  
+    res.status(201).json({ snack })
+  }
+
 module.exports = { 
     getAll,
-    getById 
+    getById,
+    create
 }
-// create, update, deleteSnack }
+// update, deleteSnack }
