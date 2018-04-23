@@ -1,9 +1,9 @@
 const model = require('../models/snacks');
 
 getAll = (req, res, next) => {
-    console.log(req.query)
+    // console.log(req.query)
     const limit = req.query.limit;
-    console.log('limit: ', limit)
+    // console.log('limit: ', limit)
     const data = model.getAll(limit);
 
     if (!data) {
@@ -29,7 +29,6 @@ getById = (req, res, next) => {
   }
 
   create = (req, res, next) => {
-    console.log("REQ BODY", req.body)
     const snack = model.create(req.body)
   
     if (snack.errors) {
@@ -39,13 +38,40 @@ getById = (req, res, next) => {
         errors: snack.errors
       })
     }
-  
     res.status(201).json({ snack })
+  }
+
+  update = (req, res, next) => {
+    const id = req.params.id
+    const updatedSnack = model.update(id, req.body)
+  
+    if (updatedSnack.errors) {
+      return next({
+        status: 400,
+        errors: updatedSnack.errors
+      })
+    }
+    res.status(200).json({ snack: updatedSnack })
+  }
+
+  deleteSnack = (req, res, next) => {
+    const id = req.params.id
+    const result = model.deleteSnack(id)
+  
+    if (result.error) {
+      return next({
+        status: 404,
+        message: `Could not find snack of id ${id}`,
+        error: result.error
+      })
+    }
+    res.status(204).json()
   }
 
 module.exports = { 
     getAll,
     getById,
-    create
+    create,
+    update,
+    deleteSnack
 }
-// update, deleteSnack }
