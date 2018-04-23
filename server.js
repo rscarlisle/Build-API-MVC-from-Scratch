@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-const uuid = require('uuid/4');
+const uuid = require('uuid/v4');
 const port = process.env.PORT || 3000;
 
 const server = express();
